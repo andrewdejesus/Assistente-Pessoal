@@ -3,8 +3,9 @@ import pyttsx3
 import pywhatkit
 import wikipedia
 import os
-import time
 
+
+print("Listening...")
 
 listener = sr.Recognizer()
 engine = pyttsx3.init()
@@ -21,9 +22,7 @@ def talk(text):
 def run_alexa():
     try: 
         with sr.Microphone() as source:
-            print("Listening...")
             voice = listener.listen(source)
-            time.sleep(0.5)
             command = listener.recognize_google(voice, language='pt-BR')
             command = command.lower()
 
@@ -54,6 +53,14 @@ def run_alexa():
                 if "computador" in command:
                     command = command.replace("computador", "")
                     os.system("shutdown /r /t 1")
+            
+
+            elif 'tirar' in command:
+                command = command.replace('tirar', "")
+                if 'print' in command:
+                    talk("Tirando print")
+                    pywhatkit.take_screenshot()
+                
             
 
             
